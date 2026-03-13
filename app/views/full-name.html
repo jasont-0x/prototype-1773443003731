@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is the full name of the person the badge is for?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["full-name"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["full-name"], href: "#full-name" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "full-name",
+      name: "full-name",
+      label: {
+        text: "What is the full name of the person the badge is for?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Enter their name as it appears on official documents." },
+      errorMessage: errors["full-name"] if errors else null,
+      value: data["full-name"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
