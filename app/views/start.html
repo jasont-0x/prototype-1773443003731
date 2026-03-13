@@ -1,0 +1,25 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Apply for a blue badge parking permit" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Apply for a blue badge parking permit</h1>
+    <p class="govuk-body">Use this service to apply for a blue badge parking permit if you have a qualifying disability or condition.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>details of the person the badge is for</li>
+      <li>information about their disability or condition</li>
+      <li>a recent photograph</li>
+      <li>proof of identity and address</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>15 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/applicant-type",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
