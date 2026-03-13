@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What type of disability or condition affects mobility?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["disability-type"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["disability-type"], href: "#disability-type" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "disability-type",
+      fieldset: {
+        legend: {
+          text: "What type of disability or condition affects mobility?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Select the option that best describes the main condition." },
+      errorMessage: errors["disability-type"] if errors else null,
+      value: data["disability-type"],
+      items: [
+        { value: "walking-difficulty", text: "Cannot walk or has considerable difficulty walking" },
+        { value: "blind", text: "Registered blind or severely sight impaired" },
+        { value: "arms", text: "Has both arms missing or has no use of both arms" },
+        { value: "learning-disability", text: "Has a learning disability and receives higher rate mobility component of DLA" },
+        { value: "none", text: "None of these apply" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
