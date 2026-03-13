@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your relationship to the person you are applying for?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["relationship"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["relationship"], href: "#relationship" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "relationship",
+      fieldset: {
+        legend: {
+          text: "What is your relationship to the person you are applying for?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["relationship"] if errors else null,
+      value: data["relationship"],
+      items: [
+        { value: "parent-guardian", text: "Parent or guardian" },
+        { value: "carer", text: "Carer or support worker" },
+        { value: "family", text: "Other family member" },
+        { value: "friend", text: "Friend or neighbour" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
